@@ -11,7 +11,7 @@ const app = express()
 const Storage = multer.diskStorage({
     destination: "./public/ftp/",
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + "-" + Date.now() + file.originalname);
+      cb(null, file.originalname);
     },
   });
   
@@ -34,6 +34,7 @@ app.get('/upload',(req,res)=>{
     res.render('upload');
 })
 app.post('/upload',upload,(req,res)=>{
+  console.log(req.file.originalname)
     res.redirect('/')
    
 })
